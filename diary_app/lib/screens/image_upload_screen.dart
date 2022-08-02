@@ -70,7 +70,7 @@ class _ImageUploadScreenState extends State<ImageUploadScreen> {
               height: MediaQuery.of(context).size.height * 0.03,
             ),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 if (image.imageFile == null) return;
                 images.addImage(image);
                 image.imageFile = null;

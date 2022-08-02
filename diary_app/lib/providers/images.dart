@@ -27,8 +27,9 @@ class Images with ChangeNotifier {
   }
 
   Future<void> addImage(img.Image selectedImage) async {
+    final createdId = DateTime.now().toString();
     // uploading file to firebase storage
-    final path = 'files/${DateTime.now()}';
+    final path = 'images/$createdId';
     print(path);
     final file = selectedImage.imageFile;
     final ref = firebase_storage.FirebaseStorage.instance.ref().child(path);
@@ -47,6 +48,7 @@ class Images with ChangeNotifier {
       url,
       body: json.encode(
         {
+          'id': createdId,
           'imageFile': selectedImage.imageFile,
           'link': selectedImage.link,
         },
@@ -54,7 +56,7 @@ class Images with ChangeNotifier {
     );
 
     final imageObject = img.Image(
-      id: json.decode(response.body)['name'],
+      id: createdId,
       imageFile: selectedImage.imageFile,
       link: selectedImage.link,
     );
@@ -73,7 +75,7 @@ class Images with ChangeNotifier {
     final List<img.Image> loadedImages = [];
     fetchedData.forEach((imageId, imageLink) {
       loadedImages.add(img.Image(
-        id: imageId,
+        id: imageLink['id'],
         link: imageLink['link'],
       ));
     });
@@ -82,9 +84,12 @@ class Images with ChangeNotifier {
   }
 
   Future<void> deleteImage(String id) async {
+    final path = 'images/$id';
+    final delRef = firebase_storage.FirebaseStorage.instance.ref().child(path);
+    await delRef.delete();
     final url = Uri.parse(
         'https://jklf-aa08d-default-rtdb.firebaseio.com/images/$id.json');
-    final response = await http.delete(url);
+    await http.delete(url);
     _imageList.removeWhere((element) => element.id == id);
     notifyListeners();
   }
