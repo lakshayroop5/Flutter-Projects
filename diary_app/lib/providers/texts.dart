@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import './text.dart' as txt;
 
 class Texts with ChangeNotifier {
-  final List<txt.Text> _textList = [
+  List<txt.Text> _textList = [
     // Text(title: 'hello', body: 'hello', dateTime: DateTime.now()),
   ];
 
@@ -14,6 +14,25 @@ class Texts with ChangeNotifier {
 
   txt.Text findTextById(String id) {
     return _textList.firstWhere((element) => element.id == id);
+  }
+
+  Future<void> fetchData() async {
+    final url =
+        Uri.parse('https://jklf-aa08d-default-rtdb.firebaseio.com/texts.json');
+
+    final response = await http.get(url);
+    final fetchedData = json.decode(response.body) as Map<String, dynamic>;
+    // print(fetchedData);
+    List<txt.Text> loadedTexts = [];
+    fetchedData.forEach((textId, textData) {
+      loadedTexts.add(txt.Text(
+        id: textId,
+        title: textData['title'],
+        body: textData['body'],
+        dateTime: DateTime.parse(textData['dateTime']),
+      ));
+    });
+    _textList = loadedTexts;
   }
 
   Future<void> addText(txt.Text newText) async {
