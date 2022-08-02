@@ -11,7 +11,7 @@ class ImagePriviewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final imageObject = ModalRoute.of(context)!.settings.arguments as img.Image;
-    final imageFile = imageObject.imageFile;
+    final imageLink = imageObject.link;
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -51,7 +51,7 @@ class ImagePriviewScreen extends StatelessWidget {
           clipBehavior: Clip.none,
           minScale: 1,
           maxScale: 6,
-          child: Image.file(imageFile!),
+          child: Image.network(imageLink!),
         ),
       ),
     );

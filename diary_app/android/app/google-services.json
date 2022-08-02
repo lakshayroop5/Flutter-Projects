@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "676294067478",
+    "firebase_url": "https://jklf-aa08d-default-rtdb.firebaseio.com",
+    "project_id": "jklf-aa08d",
+    "storage_bucket": "jklf-aa08d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:676294067478:android:cf16b68b9e59ca2596bc37",
+        "android_client_info": {
+          "package_name": "com.example.jkl"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "676294067478-62i05gpm944mt6ah47lfea2o8epuc4ac.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqkXF8qTBc2VJt9enLJkDxZs1cVRUYKV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "676294067478-62i05gpm944mt6ah47lfea2o8epuc4ac.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -56,8 +56,8 @@ class ImageGridTile extends StatelessWidget {
           ),
         ),
         child: GridTile(
-          child: Image.file(
-            image.imageFile!,
+          child: Image.network(
+            image.link!,
             height: double.infinity,
             width: double.infinity,
             fit: BoxFit.cover,

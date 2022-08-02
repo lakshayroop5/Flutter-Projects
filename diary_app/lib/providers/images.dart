@@ -28,19 +28,22 @@ class Images with ChangeNotifier {
 
   Future<void> addImage(img.Image selectedImage) async {
     // uploading file to firebase storage
-    final path = 'files/${selectedImage.id}';
+    final path = 'files/${DateTime.now()}';
+    print(path);
     final file = selectedImage.imageFile;
     final ref = firebase_storage.FirebaseStorage.instance.ref().child(path);
     firebase_storage.UploadTask? uploadtask = ref.putFile(file!);
 
     final snapshot = await uploadtask.whenComplete(() => null);
 
-    selectedImage.link = snapshot.ref.getDownloadURL() as String?;
+    final link = await snapshot.ref.getDownloadURL();
+
+    selectedImage.link = link;
 
     // adding image object to database
     final url =
         Uri.parse('https://jklf-aa08d-default-rtdb.firebaseio.com/images.json');
-    final response = await http.put(
+    final response = await http.post(
       url,
       body: json.encode(
         {
@@ -65,11 +68,23 @@ class Images with ChangeNotifier {
     final url =
         Uri.parse('https://jklf-aa08d-default-rtdb.firebaseio.com/images.json');
     final response = await http.get(url);
-    final fetchedData = json.decode(response.body);
-    print(fetchedData);
+    final fetchedData = json.decode(response.body) as Map<String, dynamic>;
+    // print(fetchedData);
+    final List<img.Image> loadedImages = [];
+    fetchedData.forEach((imageId, imageLink) {
+      loadedImages.add(img.Image(
+        id: imageId,
+        link: imageLink['link'],
+      ));
+    });
+    _imageList = loadedImages;
+    notifyListeners();
   }
 
-  void deleteImage(String id) {
+  Future<void> deleteImage(String id) async {
+    final url = Uri.parse(
+        'https://jklf-aa08d-default-rtdb.firebaseio.com/images/$id.json');
+    final response = await http.delete(url);
     _imageList.removeWhere((element) => element.id == id);
     notifyListeners();
   }

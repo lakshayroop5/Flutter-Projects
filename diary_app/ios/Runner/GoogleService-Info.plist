@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>676294067478-8oelq09uvccdrm18jjhevb59j31527bu.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.676294067478-8oelq09uvccdrm18jjhevb59j31527bu</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBHKKohjRkALg7A6T4EaYDImRgMCh89wGg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>676294067478</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.jkl</string>
+	<key>PROJECT_ID</key>
+	<string>jklf-aa08d</string>
+	<key>STORAGE_BUCKET</key>
+	<string>jklf-aa08d.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:676294067478:ios:c8c6265316c205ef96bc37</string>
+	<key>DATABASE_URL</key>
+	<string>https://jklf-aa08d-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
