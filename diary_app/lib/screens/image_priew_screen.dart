@@ -10,8 +10,11 @@ class ImagePriviewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final imageObject = ModalRoute.of(context)!.settings.arguments as img.Image;
+    final imageData =
+        ModalRoute.of(context)!.settings.arguments as Map<String, Object>;
+    final imageObject = imageData['image'] as img.Image;
     final imageLink = imageObject.link;
+    final title = imageData['title'] as String;
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -27,7 +30,7 @@ class ImagePriviewScreen extends StatelessWidget {
                       TextButton(
                         onPressed: () {
                           Provider.of<Images>(context, listen: false)
-                              .deleteImage(imageObject.id!);
+                              .deleteImage(imageObject.id!, title);
                           Navigator.of(ctx).pop();
                           Navigator.of(context).pop();
                         },

@@ -14,6 +14,7 @@ class ImageUploadScreen extends StatefulWidget {
 class _ImageUploadScreenState extends State<ImageUploadScreen> {
   @override
   Widget build(BuildContext context) {
+    final title = ModalRoute.of(context)!.settings.arguments as String;
     final image = Provider.of<img.Image>(context);
     final images = Provider.of<Images>(context);
     return Scaffold(
@@ -72,7 +73,7 @@ class _ImageUploadScreenState extends State<ImageUploadScreen> {
             ElevatedButton(
               onPressed: () async {
                 if (image.imageFile == null) return;
-                images.addImage(image);
+                images.addImage(image, title);
                 image.imageFile = null;
                 Navigator.of(context).pop();
               },

@@ -7,20 +7,22 @@ import '../providers/images.dart';
 
 class ImageGridTile extends StatelessWidget {
   final img.Image image;
-  const ImageGridTile(this.image, {Key? key}) : super(key: key);
+  final String title;
+  const ImageGridTile(this.image, this.title, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context)
-            .pushNamed(ImagePriviewScreen.routeName, arguments: image);
+        Navigator.of(context).pushNamed(ImagePriviewScreen.routeName,
+            arguments: {'image': image, 'title': title});
       },
       child: Dismissible(
         key: UniqueKey(),
         direction: DismissDirection.endToStart,
         onDismissed: (direction) {
-          Provider.of<Images>(context, listen: false).deleteImage(image.id!);
+          Provider.of<Images>(context, listen: false)
+              .deleteImage(image.id!, title);
         },
         confirmDismiss: (direction) {
           return showDialog(

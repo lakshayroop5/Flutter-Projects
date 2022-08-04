@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import './image.dart' as img;
-import 'package:firebase_core/firebase_core.dart';
 
 class Images with ChangeNotifier {
   final firebase_storage.FirebaseStorage storage =
@@ -26,11 +25,10 @@ class Images with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> addImage(img.Image selectedImage) async {
+  Future<void> addImage(img.Image selectedImage, String title) async {
     final createdId = DateTime.now().toString();
     // uploading file to firebase storage
-    final path = 'images/$createdId';
-    print(path);
+    final path = '$title/$createdId';
     final file = selectedImage.imageFile;
     final ref = firebase_storage.FirebaseStorage.instance.ref().child(path);
     firebase_storage.UploadTask? uploadtask = ref.putFile(file!);
@@ -43,8 +41,8 @@ class Images with ChangeNotifier {
 
     // adding image object to database
     final url =
-        Uri.parse('https://jklf-aa08d-default-rtdb.firebaseio.com/images.json');
-    final response = await http.post(
+        Uri.parse('https://jklf-aa08d-default-rtdb.firebaseio.com/$title.json');
+    await http.post(
       url,
       body: json.encode(
         {
@@ -66,9 +64,9 @@ class Images with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> fetchListImages() async {
+  Future<void> fetchListImages(String title) async {
     final url =
-        Uri.parse('https://jklf-aa08d-default-rtdb.firebaseio.com/images.json');
+        Uri.parse('https://jklf-aa08d-default-rtdb.firebaseio.com/$title.json');
     final response = await http.get(url);
     final fetchedData = json.decode(response.body) as Map<String, dynamic>;
     // print(fetchedData);
@@ -83,13 +81,27 @@ class Images with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> deleteImage(String id) async {
-    final path = 'images/$id';
+  Future<void> deleteImage(String id, String title) async {
+    final path = '$title/$id';
     final delRef = firebase_storage.FirebaseStorage.instance.ref().child(path);
     await delRef.delete();
-    final url = Uri.parse(
-        'https://jklf-aa08d-default-rtdb.firebaseio.com/images/$id.json');
-    await http.delete(url);
+
+    final url =
+        Uri.parse('https://jklf-aa08d-default-rtdb.firebaseio.com/$title.json');
+    final response = await http.get(url);
+    final data = json.decode(response.body) as Map<String, dynamic>;
+    String fid = '';
+    data.forEach((key, value) {
+      if (value['id'] == id) {
+        fid = key;
+      }
+    });
+    final url_ = Uri.parse(
+        'https://jklf-aa08d-default-rtdb.firebaseio.com/$title/$fid.json');
+    if (fid.isEmpty) {
+      return;
+    }
+    await http.delete(url_);
     _imageList.removeWhere((element) => element.id == id);
     notifyListeners();
   }

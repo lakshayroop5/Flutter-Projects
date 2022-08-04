@@ -67,7 +67,7 @@ class Texts with ChangeNotifier {
     final url = Uri.parse(
         'https://jklf-aa08d-default-rtdb.firebaseio.com/texts/${newText.id}.json');
     final timeStamp = newText.dateTime!.toIso8601String();
-    final response = await http.patch(url,
+    await http.patch(url,
         body: json.encode({
           'title': newText.title,
           'body': newText.body,
@@ -83,7 +83,7 @@ class Texts with ChangeNotifier {
   Future<void> deleteText(String id) async {
     final url = Uri.parse(
         'https://jklf-aa08d-default-rtdb.firebaseio.com/texts/$id.json');
-    final response = await http.delete(url);
+    await http.delete(url);
     _textList.removeWhere((element) => element.id == id);
     notifyListeners();
   }

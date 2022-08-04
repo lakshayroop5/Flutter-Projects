@@ -24,8 +24,6 @@ class _TextUploadScreenState extends State<TextUploadScreen> {
 
   @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-
     if (_init) {
       textId = ModalRoute.of(context)!.settings.arguments as String?;
     }

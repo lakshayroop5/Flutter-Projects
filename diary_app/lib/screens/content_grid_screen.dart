@@ -3,9 +3,33 @@ import 'package:jkl/widgets/text_grid.dart';
 import '../widgets/add_button.dart';
 import '../widgets/image_grid.dart';
 
-class ContentGridScreen extends StatelessWidget {
+class ContentGridScreen extends StatefulWidget {
   static const String routeName = '/content-grid-screen';
   const ContentGridScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ContentGridScreen> createState() => _ContentGridScreenState();
+}
+
+class _ContentGridScreenState extends State<ContentGridScreen> {
+  @override
+  void initState() {
+    setState(() {});
+    super.initState();
+  }
+
+  String setTitle(title) {
+    if (title == 'Text 📄') {
+      return 'text';
+    }
+    if (title == 'Panda 🐼') {
+      return 'images';
+    }
+    if (title == 'Koala 🐨') {
+      return 'koala';
+    }
+    return '';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,13 +39,15 @@ class ContentGridScreen extends StatelessWidget {
       appBar: AppBar(title: Text(title)),
       body: Stack(
         children: [
-          if (title == 'Text') const TextGrid(),
-          if (title == 'Images') const ImageGrid(),
+          if (title == 'Text 📄') const TextGrid(),
+          if (title == 'Panda 🐼') const ImageGrid('images'),
+          if (title == 'Koala 🐨') const ImageGrid('koala'),
           Positioned(
-            bottom: dimension.height * 0.08,
-            right: dimension.width * 0.08,
-            child: AddButton('/$title-upload-screen'),
-          ),
+              bottom: dimension.height * 0.08,
+              right: dimension.width * 0.08,
+              child: title == 'Text'
+                  ? AddButton('/Text-upload-screen', setTitle(title))
+                  : AddButton('/Images-upload-screen', setTitle(title))),
         ],
       ),
     );

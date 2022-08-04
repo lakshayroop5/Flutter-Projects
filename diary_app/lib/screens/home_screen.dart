@@ -10,7 +10,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             child: Image.asset('lib/assets/home background.jpg',
@@ -21,13 +21,13 @@ class HomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
                 HomeTile(
-                  title: 'Text',
+                  title: 'Text 📄',
                 ),
                 HomeTile(
-                  title: 'Images',
+                  title: 'Panda 🐼',
                 ),
                 HomeTile(
-                  title: 'Screen Shots',
+                  title: 'Koala 🐨',
                 ),
               ],
             ),

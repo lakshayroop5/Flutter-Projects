@@ -1,7 +1,4 @@
-import 'dart:io';
-
 import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +38,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           appBarTheme: const AppBarTheme(color: Colors.red),
         ),
-        home: SplashScreen(),
+        home: const SplashScreen(),
         routes: {
           HomeScreen.routeName: (context) => const HomeScreen(),
           ContentGridScreen.routeName: (context) => const ContentGridScreen(),
@@ -59,7 +56,6 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return AnimatedSplashScreen(
       splash: Image.asset(
         'lib/assets/splash screen.jpeg',
