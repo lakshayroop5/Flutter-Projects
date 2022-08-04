@@ -12,7 +12,7 @@ class AddButton extends StatelessWidget {
         Navigator.of(context).pushNamed(routeName);
       },
       child: const CircleAvatar(
-        backgroundColor: Colors.purple,
+        backgroundColor: Colors.red,
         maxRadius: 30,
         child: Icon(
           Icons.add,

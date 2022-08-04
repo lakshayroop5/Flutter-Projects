@@ -8,21 +8,31 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            HomeTile(
-              title: 'Text',
+      body: Stack(
+        children: [
+          Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            child: Image.asset('lib/assets/home background.jpg',
+                fit: BoxFit.cover),
+          ),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                HomeTile(
+                  title: 'Text',
+                ),
+                HomeTile(
+                  title: 'Images',
+                ),
+                HomeTile(
+                  title: 'Screen Shots',
+                ),
+              ],
             ),
-            HomeTile(
-              title: 'Images',
-            ),
-            HomeTile(
-              title: 'Screen Shots',
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

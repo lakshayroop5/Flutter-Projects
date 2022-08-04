@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -38,9 +39,9 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         theme: ThemeData(
-          appBarTheme: const AppBarTheme(color: Colors.purple),
+          appBarTheme: const AppBarTheme(color: Colors.red),
         ),
-        home: const HomeScreen(),
+        home: SplashScreen(),
         routes: {
           HomeScreen.routeName: (context) => const HomeScreen(),
           ContentGridScreen.routeName: (context) => const ContentGridScreen(),
@@ -49,6 +50,24 @@ class MyApp extends StatelessWidget {
           ImagePriviewScreen.routeName: (context) => const ImagePriviewScreen(),
         },
       ),
+    );
+  }
+}
+
+class SplashScreen extends StatelessWidget {
+  const SplashScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return AnimatedSplashScreen(
+      splash: Image.asset(
+        'lib/assets/splash screen.jpeg',
+        fit: BoxFit.cover,
+      ),
+      nextScreen: const HomeScreen(),
+      animationDuration: const Duration(seconds: 1),
+      splashIconSize: double.infinity,
     );
   }
 }
