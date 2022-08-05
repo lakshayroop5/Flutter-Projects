@@ -45,9 +45,13 @@ class _ContentGridScreenState extends State<ContentGridScreen> {
           Positioned(
               bottom: dimension.height * 0.08,
               right: dimension.width * 0.08,
-              child: title == 'Text'
-                  ? AddButton('/Text-upload-screen', setTitle(title))
-                  : AddButton('/Images-upload-screen', setTitle(title))),
+              child: title == 'Text 📄'
+                  ? AddButton(
+                      routeName: '/Text-upload-screen',
+                    )
+                  : AddButton(
+                      routeName: '/Images-upload-screen',
+                      title: setTitle(title))),
         ],
       ),
     );

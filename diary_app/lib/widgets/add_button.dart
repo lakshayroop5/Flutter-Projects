@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class AddButton extends StatelessWidget {
   final String routeName;
-  final String title;
+  String? title;
 // ignore: use_key_in_widget_constructors
-  const AddButton(this.routeName, this.title);
+  AddButton({required this.routeName, this.title});
 
   @override
   Widget build(BuildContext context) {

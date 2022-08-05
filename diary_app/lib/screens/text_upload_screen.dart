@@ -26,18 +26,19 @@ class _TextUploadScreenState extends State<TextUploadScreen> {
   void didChangeDependencies() {
     if (_init) {
       textId = ModalRoute.of(context)!.settings.arguments as String?;
+
+      if (textId != null) {
+        _newText =
+            Provider.of<Texts>(context, listen: false).findTextById(textId!);
+        _selectedDate = _newText.dateTime;
+      }
+      _initialText = text.Text(
+        id: _newText.id,
+        title: _newText.title,
+        body: _newText.body,
+        dateTime: _newText.dateTime,
+      );
     }
-    if (textId != null) {
-      _newText =
-          Provider.of<Texts>(context, listen: false).findTextById(textId!);
-      _selectedDate = _newText.dateTime;
-    }
-    _initialText = text.Text(
-      id: _newText.id,
-      title: _newText.title,
-      body: _newText.body,
-      dateTime: _newText.dateTime,
-    );
 
     _init = false;
 
